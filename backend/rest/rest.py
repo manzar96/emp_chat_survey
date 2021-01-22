@@ -1,8 +1,10 @@
 from flask import Flask, request
-from backend.connectDB import DBConnect
-from backend.loaddata import DataLoader
+from flask_cors import CORS
+from connectDB import DBConnect
+from loaddata import DataLoader
 
 app = Flask(__name__)
+CORS(app)
 dbconn = DBConnect(dbname="postgres",
                    user="postgres",
                    host='0.0.0.0',
@@ -27,6 +29,7 @@ def createconvpage1():
     # then return a full dict-json with keys: input,model3,dodeca,target,
     # emotion
     # return kai ena success pedio
+    print("done")
     final_dict = {}
     for key in conv_data.keys():
         final_dict[key] = {"input": conv_data[key],
@@ -57,4 +60,4 @@ def savetodb():
 
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=5000)
+   app.run(host='0.0.0.0', port=5001)

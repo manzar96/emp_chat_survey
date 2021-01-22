@@ -2,13 +2,14 @@
   "name": "empathetic_chatbot_survey",
   "version": "1.0.0",
   "description": "A survey for evaluating chatbots",
-  "main": "index.js",
+  "main": "src/html/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Emmanouil Zaranis",
   "license": "MIT",
   "devDependencies": {
+    "jquery": "^3.5.1",
     "jquery-bar-rating": "^1.2.2"
   },
   "dependencies": {}
