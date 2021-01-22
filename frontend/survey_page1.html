@@ -57,8 +57,16 @@
             if ((question1.checkValidity()===true) && (box1.checkValidity() ||
                 box2.checkValidity)===true){
                 console.log('valid');
-                question1.submit();
-                question2.submit();
+                console.log(box1);
+
+                $.ajax({
+                  url: 'http://0.0.0.0:5000/savedb',
+                  type: 'POST',
+                  data: box1,
+                  success: function(data) {
+                    alert('Load was performed.');
+                  }
+                });
             }else{
                 alert("Please fill in all the fields");
             }
