@@ -11,24 +11,37 @@ function makerequest_async () {
     }
 }
 
-function submitform(){
-    list = document.getElementsByClassName("page1")
+function submitform(event){
+
+    list = document.forms
     valid = true
     for (i=0;i<list.length;i++){
         valid = (valid && list[i].checkValidity())
+
     }
 
     if (valid === true){
         console.log("valid");
-        sessionStorage.setItem("conversations_page1_results",list);
-        window.location.replace("../html/page2.html");
-
-
+        // sessionStorage.setItem("conversations_page1_results", list);
+        // window.location.replace("../html/page2.html");
+        val = list[0].getAttribute("value")
+            console.log(val)
+        console.log(getFormJSON(list[0]))
     }
     else{
         alert("Please fill in all fields!")
     }
 }
+
+
+const getFormJSON = (form) => {
+   const data = new FormData(form);
+   return Array.from(data.keys()).reduce((result, key) => {
+       result[key] = data.get(key);
+       return result;
+   }, {});
+};
+
 
 function writeconversations() {
     json_text = sessionStorage.getItem("conversations_page1");
@@ -52,6 +65,7 @@ function writeconversations() {
                 document.write("<br>")
                 document.write("<br>")
                 document.write("Rate Empathy: ")
+                document.write("<form>")
                 document.write("<select id=emp"+counter+" class=page1" +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
@@ -61,8 +75,10 @@ function writeconversations() {
                     "   <option value=\"4\">4</option>" +
                     "   <option value=\"5\">5</option>  " +
                     " </select>")
+                document.write("</form>")
                 document.write("<br>")
                 document.write("Rate Relevance: ")
+                document.write("<form>")
                 document.write("<select id=rel"+counter+" class=page1 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
@@ -72,8 +88,10 @@ function writeconversations() {
                     "   <option value=\"4\">4</option>" +
                     "   <option value=\"5\">5</option>  " +
                     " </select>")
+                document.write("</form>")
                 document.write("<br>")
                 document.write("Rate Fluency: ")
+                document.write("<form>")
                 document.write("<select id=flu"+counter+" class=page1 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
@@ -83,6 +101,7 @@ function writeconversations() {
                     "   <option value=\"4\">4</option>" +
                     "   <option value=\"5\">5</option>  " +
                     " </select>")
+                document.write("</form>")
                 document.write("<br>")
 
             }
@@ -103,6 +122,7 @@ function writeconversations() {
                 document.write("<br>")
                 document.write("<br>")
                 document.write("Rate Empathy: ")
+                document.write("<form>")
                 document.write("<select id=emp"+counter+" class=page1 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
@@ -112,8 +132,10 @@ function writeconversations() {
                     "   <option value=\"4\">4</option>" +
                     "   <option value=\"5\">5</option>  " +
                     " </select>")
+                document.write("</form>")
                 document.write("<br>")
                 document.write("Rate Relevance: ")
+                document.write("<form>")
                 document.write("<select id=rel"+counter+" class=page1 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
@@ -123,8 +145,10 @@ function writeconversations() {
                     "   <option value=\"4\">4</option>" +
                     "   <option value=\"5\">5</option>  " +
                     " </select>")
+                document.write("</form>")
                 document.write("<br>")
                 document.write("Rate Fluency: ")
+                document.write("<form>")
                 document.write("<select id=flu"+counter+" class=page1 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
@@ -134,6 +158,7 @@ function writeconversations() {
                     "   <option value=\"4\">4</option>" +
                     "   <option value=\"5\">5</option>  " +
                     " </select>")
+                document.write("</form>")
                 document.write("<br>")
             }
         }
@@ -141,6 +166,7 @@ function writeconversations() {
 
     }
 }
+
 
 
 
