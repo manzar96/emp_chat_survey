@@ -1,15 +1,15 @@
-function makerequest_async () {
-    let xmlhttp = new XMLHttpRequest()
-
-    xmlhttp.open("GET", "http://localhost:5001/page1", true);
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === XMLHttpRequest.DONE){
-            text = xmlhttp.responseText
-            sessionStorage.setItem("conversations_page1",text);
-        }
-    }
-}
+// function makerequest_async () {
+//     let xmlhttp = new XMLHttpRequest()
+//
+//     xmlhttp.open("GET", "http://localhost:5001/page1", true);
+//     xmlhttp.send();
+//     xmlhttp.onreadystatechange = function () {
+//         if (xmlhttp.readyState === XMLHttpRequest.DONE){
+//             text = xmlhttp.responseText
+//             sessionStorage.setItem("conversations_page2",text);
+//         }
+//     }
+// }
 
 function submitform(){
     list = document.getElementsByClassName("page1")
@@ -20,9 +20,7 @@ function submitform(){
 
     if (valid === true){
         console.log("valid");
-        sessionStorage.setItem("conversations_page1_results",list);
-        window.location.replace("../html/page2.html");
-
+        sessionStorage.setItem("conversations_page2_results",list);
 
     }
     else{
@@ -32,7 +30,7 @@ function submitform(){
 
 function writeconversations() {
     json_text = sessionStorage.getItem("conversations_page1");
-    document.getElementById("add1").innerHTML = ""
+    document.getElementById("add2").innerHTML = ""
     dict = JSON.parse(json_text)
     counter = 1
     for (key in dict){
@@ -40,7 +38,7 @@ function writeconversations() {
             document.write("<br><b>Conversation ")
             document.write(counter+"</b><br>")
             input = dict[key]["input"]
-            mymodel = dict[key]["mymodel"]
+            dodeca = dict[key]["dodeca"]
 
             if (input.length === 1){
                 document.write("<br><div style=\"color:green;\">Speaker:</div>")
@@ -48,7 +46,7 @@ function writeconversations() {
                 document.write("<br>")
                 document.write("<br><div" +
                     " style=\"color:blue;\">Generated Response:</div>")
-                document.write(mymodel)
+                document.write(dodeca)
                 document.write("<br>")
                 document.write("<br>")
                 document.write("Rate Empathy: ")
@@ -99,7 +97,7 @@ function writeconversations() {
                 document.write("<br>")
                                 document.write("<br><div" +
                     " style=\"color:blue;\">Generated Response:</div>")
-                document.write(mymodel)
+                document.write(dodeca)
                 document.write("<br>")
                 document.write("<br>")
                 document.write("Rate Empathy: ")
