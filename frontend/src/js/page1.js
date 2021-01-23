@@ -5,29 +5,40 @@ function makerequest_async () {
     xmlhttp.send();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === XMLHttpRequest.DONE){
+            console.log(xmlhttp.response)
             text = xmlhttp.responseText
             sessionStorage.setItem("conversations_page1",text);
+            writeconversations()
         }
     }
 }
 
 function submitform(event){
-
-    list = document.forms
+    list = document.getElementsByClassName("page1")
     valid = true
     for (i=0;i<list.length;i++){
         valid = (valid && list[i].checkValidity())
-
     }
 
     if (valid === true){
         console.log("valid");
-        // sessionStorage.setItem("conversations_page1_results", list);
-        // window.location.replace("../html/page2.html");
-        val = list[0].getAttribute("value")
-            console.log(val)
-        console.log(getFormJSON(list[0]))
-    }
+        results_page1 = [];
+        json_text = sessionStorage.getItem("conversations_page1");
+        dict = JSON.parse(json_text)
+        counter = 0
+        for (key in dict){
+            if(dict.hasOwnProperty(key)){
+                results_page1.push({
+                    key:   key,
+                    value: [ list[counter].value, list[counter+1].value, list[counter+2].value ]
+                });
+                counter +=3
+            }
+        }
+        sessionStorage.setItem("conversations_page1_results", JSON.stringify(results_page1));
+        window.location.replace("../html/page2.html");
+
+     }
     else{
         alert("Please fill in all fields!")
     }

@@ -24,7 +24,7 @@ def dummy(name):
 
 @app.route('/page1',methods=["GET"])
 def createconvpage1():
-    conv_data = dataloader.sampledata(num_samples=1)
+    conv_data = dataloader.sampledata(num_samples=2)
     # add here model3 outputs and dodeca outputs
     # then return a full dict-json with keys: input,model3,dodeca,target,
     # emotion

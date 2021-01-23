@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script  src="../../node_modules/jquery/dist/jquery.js"></script>
     <script  src="../../src/js/page1.js"></script>
+    <script>
+    window.onload = makerequest_async();
+    </script>
 
     <!-- Tab Name-->
     <title>Empathetic Chatbot Survey</title>
@@ -18,37 +21,8 @@
 <div id="add1"></div>
 
 
-<script>
-makerequest_async()
-</script>
-
-<script>
-    writeconversations()
-</script>
 
 <input type="button" value="Next" onclick="submitform()">
-
-
-<!--<button id="submit">Submit</button>-->
-
-<!--<script>-->
-<!--    document.getElementById( 'submit' ).addEventListener( 'click', function () {-->
-<!--        //check if all forms are filled in:-->
-<!--        valid = true-->
-<!--        for (i=0;i<document.forms.length;i++){-->
-<!--            valid = (valid && document.forms[i].checkValidity())-->
-<!--        }-->
-
-<!--        if(valid === true){-->
-<!--            for( var index = 0; index < document.forms.length; index++ ) {-->
-<!--                document.forms[index].submit();-->
-<!--            };-->
-<!--        }-->
-<!--        else{-->
-<!--            alert("Please fill in all fields!")-->
-<!--        }-->
-<!--} );-->
-<!--</script>-->
 
 </body>
 </html>
