@@ -40,9 +40,26 @@ def createconvpage1():
                            "situation": "dummy situation"}
     return final_dict
 
-
-@app.route('/page2',methods=["GET"]) # maybe needs PUT
+@app.route('/page2',methods=["GET"])
 def createconvpage2():
+    conv_data = dataloader.sampledata(num_samples=2)
+    # add here model3 outputs and dodeca outputs
+    # then return a full dict-json with keys: input,model3,dodeca,target,
+    # emotion
+    # return kai ena success pedio
+    print("done")
+    final_dict = {}
+    for key in conv_data.keys():
+        final_dict[key] = {"input": conv_data[key],
+                           "mymodel": "Dummy Model Answer",
+                           "dodeca": "Dummy Dodeca Answer",
+                           "target": "Dummy target answer",
+                           "emo": "dummy emotion label",
+                           "situation": "dummy situation"}
+    return final_dict
+
+@app.route('/page3',methods=["GET"])
+def createconvpage3():
     conv_data = dataloader.sampledata(num_samples=10)
     # add here model3 outputs and dodeca outputs
     # then return a full dict-json with keys: input,model3,dodeca,target,

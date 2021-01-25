@@ -1,19 +1,19 @@
 function makerequest_async () {
     let xmlhttp = new XMLHttpRequest()
-    xmlhttp.open("GET", "http://localhost:5001/page2", true);
+    xmlhttp.open("GET", "http://localhost:5001/page3", true);
     xmlhttp.send();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === XMLHttpRequest.DONE){
             console.log(xmlhttp.response)
             text = xmlhttp.responseText
-            sessionStorage.setItem("conversations_page2",text);
+            sessionStorage.setItem("conversations_page3",text);
             writeconversations()
         }
     }
 }
 
 function submitform(){
-    list = document.getElementsByClassName("page2")
+    list = document.getElementsByClassName("page3")
     valid = true
     for (i=0;i<list.length;i++){
         valid = (valid && list[i].checkValidity())
@@ -21,27 +21,28 @@ function submitform(){
 
     if (valid === true){
         console.log("valid");
-        results_page2 = [];
-        json_text = sessionStorage.getItem("conversations_page2");
+        results_page3 = [];
+        json_text = sessionStorage.getItem("conversations_page3");
         dict = JSON.parse(json_text)
         counter = 0
         for (key in dict){
             if(dict.hasOwnProperty(key)){
-                results_page2.push({
+                results_page3.push({
                     key:   key,
                     value: [ list[counter].value, list[counter+1].value, list[counter+2].value ]
                 });
                 counter +=3
             }
         }
-        sessionStorage.setItem("conversations_page2_results", JSON.stringify(results_page2));
-        window.location.href="../html/page3.html";
-
+        sessionStorage.setItem("conversations_page3_results", JSON.stringify(results_page3));
+        window.location.href="../html/page4.html";
      }
     else{
         alert("Please fill in all fields!")
     }
 }
+
+
 
 
 function writeconversations() {
@@ -57,7 +58,7 @@ function writeconversations() {
             mystring +=("<b> Conversation ")
             mystring +=(counter+"</b><br>")
             input = dict[key]["input"]
-            mymodel = dict[key]["mymodel"]
+            mymodel = dict[key]["dodeca"]
 
             if (input.length === 1){
                 mystring +=("<br><div style=\"color:green;\">Speaker:</div>")
@@ -70,7 +71,7 @@ function writeconversations() {
                 mystring +=("<br>")
                 mystring +=("Rate Empathy: ")
                 mystring +=("<form>")
-                mystring +=("<select id=emp"+counter+" class=page2" +
+                mystring +=("<select id=emp"+counter+" class=page3" +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
                     "   <option value=\"1\">1</option>" +
@@ -83,7 +84,7 @@ function writeconversations() {
                 mystring +=("<br>")
                 mystring +=("Rate Relevance: ")
                 mystring +=("<form>")
-                mystring +=("<select id=rel"+counter+" class=page2 " +
+                mystring +=("<select id=rel"+counter+" class=page3 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
                     "   <option value=\"1\">1</option>" +
@@ -96,7 +97,7 @@ function writeconversations() {
                 mystring +=("<br>")
                 mystring +=("Rate Fluency: ")
                 mystring +=("<form>")
-                mystring +=("<select id=flu"+counter+" class=page2 " +
+                mystring +=("<select id=flu"+counter+" class=page3 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
                     "   <option value=\"1\">1</option>" +
@@ -127,7 +128,7 @@ function writeconversations() {
                 mystring +=("<br>")
                 mystring +=("Rate Empathy: ")
                 mystring +=("<form>")
-                mystring +=("<select id=emp"+counter+" class=page2 " +
+                mystring +=("<select id=emp"+counter+" class=page3 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
                     "   <option value=\"1\">1</option>" +
@@ -140,7 +141,7 @@ function writeconversations() {
                 mystring +=("<br>")
                 mystring +=("Rate Relevance: ")
                 mystring +=("<form>")
-                mystring +=("<select id=rel"+counter+" class=page2 " +
+                mystring +=("<select id=rel"+counter+" class=page3 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
                     "   <option value=\"1\">1</option>" +
@@ -153,7 +154,7 @@ function writeconversations() {
                 mystring +=("<br>")
                 mystring +=("Rate Fluency: ")
                 mystring +=("<form>")
-                mystring +=("<select id=flu"+counter+" class=page2 " +
+                mystring +=("<select id=flu"+counter+" class=page3 " +
                     " required>\n" +
                     "   <option disabled selected value> -- select an option -- </option>" +
                     "   <option value=\"1\">1</option>" +
@@ -172,7 +173,3 @@ function writeconversations() {
     document.getElementById("add").innerHTML = mystring
 
 }
-
-
-
-

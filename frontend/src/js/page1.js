@@ -12,11 +12,12 @@ function makerequest_async () {
     }
 }
 
-function submitform(event){
+function submitform(){
     list = document.getElementsByClassName("page1")
     valid = true
     for (i=0;i<list.length;i++){
-        valid = (valid && list[i].checkValidity())
+        form = list[i]
+        valid = (valid && (form[0].checked || form[1].checked ))
     }
 
     if (valid === true){
@@ -29,9 +30,10 @@ function submitform(event){
             if(dict.hasOwnProperty(key)){
                 results_page1.push({
                     key:   key,
-                    value: [ list[counter].value, list[counter+1].value, list[counter+2].value ]
+                    value: [ list[counter][0].checked, list[counter][1].checked  ]
                 });
-                counter +=3
+                counter +=1
+
             }
         }
         sessionStorage.setItem("conversations_page1_results", JSON.stringify(results_page1));
@@ -43,15 +45,20 @@ function submitform(event){
     }
 }
 
-
-const getFormJSON = (form) => {
-   const data = new FormData(form);
-   return Array.from(data.keys()).reduce((result, key) => {
-       result[key] = data.get(key);
-       return result;
-   }, {});
-};
-
+function checkboxing(param){
+            pressedid =param.id;
+            base_id = pressedid.split("_")[0];
+            checkbox1 = document.getElementById(base_id+"_1")
+            checkbox2 = document.getElementById(base_id+"_2")
+            if (pressedid === checkbox1.id){
+                checkbox1.checked = true;
+                checkbox2.checked = false;
+            }
+            else{
+                checkbox2.checked = true;
+                checkbox1.checked = false;
+            }
+}
 
 function writeconversations() {
     json_text = sessionStorage.getItem("conversations_page1");
@@ -61,58 +68,35 @@ function writeconversations() {
     mystring = ""
     for (key in dict){
         if(dict.hasOwnProperty(key)){
-            mystring +=("<br><b>Conversation ")
+            mystring += "<br><span class=\"iconify\"" +
+                " data-icon=\"fa-solid:robot\" data-inline=\"false\"></span>"
+            mystring +=("<b> Conversation ")
             mystring +=(counter+"</b><br>")
             input = dict[key]["input"]
             mymodel = dict[key]["mymodel"]
+            dodeca = dict[key]["dodeca"]
+
 
             if (input.length === 1){
                 mystring +=("<br><div style=\"color:green;\">Speaker:</div>")
                 mystring +=(input[0])
                 mystring +=("<br>")
                 mystring +=("<br><div" +
-                    " style=\"color:blue;\">Generated Response:</div>")
+                    " style=\"color:blue;\">Generated Response 1:</div>")
                 mystring +=(mymodel)
+                mystring +=("<br><br><div" +
+                    " style=\"color:blue;\">Generated Response 2:</div>")
+                mystring +=(dodeca)
                 mystring +=("<br>")
                 mystring +=("<br>")
-                mystring +=("Rate Empathy: ")
-                mystring +=("<form>")
-                mystring +=("<select id=emp"+counter+" class=page1" +
-                    " required>\n" +
-                    "   <option disabled selected value> -- select an option -- </option>" +
-                    "   <option value=\"1\">1</option>" +
-                    "   <option value=\"2\">2</option>" +
-                    "   <option value=\"3\">3</option>" +
-                    "   <option value=\"4\">4</option>" +
-                    "   <option value=\"5\">5</option>  " +
-                    " </select>")
-                mystring +=("</form>")
-                mystring +=("<br>")
-                mystring +=("Rate Relevance: ")
-                mystring +=("<form>")
-                mystring +=("<select id=rel"+counter+" class=page1 " +
-                    " required>\n" +
-                    "   <option disabled selected value> -- select an option -- </option>" +
-                    "   <option value=\"1\">1</option>" +
-                    "   <option value=\"2\">2</option>" +
-                    "   <option value=\"3\">3</option>" +
-                    "   <option value=\"4\">4</option>" +
-                    "   <option value=\"5\">5</option>  " +
-                    " </select>")
-                mystring +=("</form>")
-                mystring +=("<br>")
-                mystring +=("Rate Fluency: ")
-                mystring +=("<form>")
-                mystring +=("<select id=flu"+counter+" class=page1 " +
-                    " required>\n" +
-                    "   <option disabled selected value> -- select an option -- </option>" +
-                    "   <option value=\"1\">1</option>" +
-                    "   <option value=\"2\">2</option>" +
-                    "   <option value=\"3\">3</option>" +
-                    "   <option value=\"4\">4</option>" +
-                    "   <option value=\"5\">5</option>  " +
-                    " </select>")
-                mystring +=("</form>")
+                mystring +=("Best Response: ")
+                mystring +=("<form class=\"page1\">Response 1:" +
+                " <input" + " type=\"checkbox\" " +
+                "id=\"Response"+counter+"_1\" name=\"Response1\"" +
+                " onclick=\"checkboxing(this)\">" +
+                "Response 2:<input type=\"checkbox\" id=\"Response"+counter+"_2\" " +
+                "name=\"Response2\"" +
+                " onclick=\"checkboxing(this)\"></form>")
                 mystring +=("<br>")
 
             }
@@ -127,56 +111,30 @@ function writeconversations() {
                 mystring +=("<br><div style=\"color:green;\">Speaker:</div>")
                 mystring +=(input[2])
                 mystring +=("<br>")
-                                mystring +=("<br><div" +
-                    " style=\"color:blue;\">Generated Response:</div>")
+                mystring +=("<br><div" +
+                " style=\"color:blue;\">Generated Response 1:</div>")
                 mystring +=(mymodel)
+                mystring +=("<br><br><div" +
+                " style=\"color:blue;\">Generated Response 2:</div>")
+                mystring +=(dodeca)
                 mystring +=("<br>")
                 mystring +=("<br>")
-                mystring +=("Rate Empathy: ")
-                mystring +=("<form>")
-                mystring +=("<select id=emp"+counter+" class=page1 " +
-                    " required>\n" +
-                    "   <option disabled selected value> -- select an option -- </option>" +
-                    "   <option value=\"1\">1</option>" +
-                    "   <option value=\"2\">2</option>" +
-                    "   <option value=\"3\">3</option>" +
-                    "   <option value=\"4\">4</option>" +
-                    "   <option value=\"5\">5</option>  " +
-                    " </select>")
-                mystring +=("</form>")
+                mystring +=("Best Response: ")
+                mystring +=("<form class=\"page1\">Response 1:" +
+                " <input" + " type=\"checkbox\" " +
+                "id=\"Response"+counter+"_1\" name=\"Response1\"" +
+                " onclick=\"checkboxing(this)\">" +
+                "Response 2:<input type=\"checkbox\" id=\"Response"+counter+"_2\" " +
+                "name=\"Response2\"" +
+                " onclick=\"checkboxing(this)\"></form>")
                 mystring +=("<br>")
-                mystring +=("Rate Relevance: ")
-                mystring +=("<form>")
-                mystring +=("<select id=rel"+counter+" class=page1 " +
-                    " required>\n" +
-                    "   <option disabled selected value> -- select an option -- </option>" +
-                    "   <option value=\"1\">1</option>" +
-                    "   <option value=\"2\">2</option>" +
-                    "   <option value=\"3\">3</option>" +
-                    "   <option value=\"4\">4</option>" +
-                    "   <option value=\"5\">5</option>  " +
-                    " </select>")
-                mystring +=("</form>")
-                mystring +=("<br>")
-                mystring +=("Rate Fluency: ")
-                mystring +=("<form>")
-                mystring +=("<select id=flu"+counter+" class=page1 " +
-                    " required>\n" +
-                    "   <option disabled selected value> -- select an option -- </option>" +
-                    "   <option value=\"1\">1</option>" +
-                    "   <option value=\"2\">2</option>" +
-                    "   <option value=\"3\">3</option>" +
-                    "   <option value=\"4\">4</option>" +
-                    "   <option value=\"5\">5</option>  " +
-                    " </select>")
-                mystring +=("</form>")
                 mystring +=("<br>")
             }
         }
         counter +=1
     }
     }
-    document.getElementById("add1").innerHTML = mystring
+    document.getElementById("add").innerHTML = mystring
 
 }
 
