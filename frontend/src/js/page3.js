@@ -12,6 +12,12 @@ function makerequest_async () {
     }
 }
 
+function set_same_conv () {
+    text = sessionStorage.getItem("conversations_page2");
+    sessionStorage.setItem("conversations_page3",text);
+    writeconversations()
+}
+
 function submitform(){
     list = document.getElementsByClassName("page3")
     valid = true
@@ -35,7 +41,7 @@ function submitform(){
             }
         }
         sessionStorage.setItem("conversations_page3_results", JSON.stringify(results_page3));
-        window.location.href="../html/page4.html";
+        window.location.href="../html/last.html";
      }
     else{
         alert("Please fill in all fields!")
@@ -46,7 +52,7 @@ function submitform(){
 
 
 function writeconversations() {
-    json_text = sessionStorage.getItem("conversations_page2");
+    json_text = sessionStorage.getItem("conversations_page3");
     if (json_text != null){
     dict = JSON.parse(json_text)
     counter = 1
@@ -170,6 +176,7 @@ function writeconversations() {
         counter +=1
     }
     }
+    console.log(mystring)
     document.getElementById("add").innerHTML = mystring
 
 }
