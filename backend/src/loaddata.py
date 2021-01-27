@@ -2,6 +2,7 @@ import pickle
 import random
 import csv
 
+
 class DataLoader:
     def __init__(self, convfile, model3file, dodecafile):
         self.convfile = convfile

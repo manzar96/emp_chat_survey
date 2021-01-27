@@ -1,13 +1,14 @@
 version: "3.6"
 
 services:
-  manos_db:
+  db:
     image: postgres:latest
     environment:
+      - POSTGRES_USER=empchat
       - POSTGRES_PASSWORD=manoszar
     ports:
     - "8888:5432"
     volumes:
     - /home/manzar/projects/postgres_survey:/var/lib/postgresql/data
-    - /home/manzar/projects/emp_chat_survey/init.sql:/docker-entrypoint-initdb.d/initdb.sql
+    - /home/manzar/projects/emp_chat_survey/postgresdb/init.sql:/docker-entrypoint-initdb.d/initdb.sql
 
