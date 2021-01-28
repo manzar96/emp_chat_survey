@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  backend_server:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - "PYTHONUNBUFFERED=1"
+networks:
+  default:
+    external:
+      name: manos_network

@@ -13,3 +13,9 @@ services:
     - /home/manzar/projects/emp_chat_survey/postgresdb/data:/var/lib/postgresql/data
     - /home/manzar/projects/emp_chat_survey/postgresdb/init.sql:/docker-entrypoint-initdb.d/initdb.sql
 
+    
+    
+networks:
+    default:
+        external:
+            name: manos_network
