@@ -79,35 +79,34 @@ class DBConnect:
                 raise IOError
             convs4_res.append([key, selection])
 
-        import ipdb;
-        ipdb.set_trace()
-
         # insertion of page1 (pairwise comparison)
         for sample in convs1_res:
-
-            query = "INSERT INTO pairwise_comp (dialog_id,selection) VALUES (" \
+            query = "INSERT INTO pairwise_comp (dialog_id,selection) VALUES ("\
                     "{},{})".format(sample[0],sample[1])
-            self.execute_query1(query)
+            self.execute_query(query)
 
-            import ipdb;
-            ipdb.set_trace()
+        for sample in convs2_res:
+            query = "INSERT INTO rating_model (dialog_id,emp,rel,flu) VALUES ({}," \
+                    "{},{},{})".format(sample[0],sample[1],sample[2],
+                                         sample[3])
+            self.execute_query(query)
 
-        # for sample in convs1_res:
-        #     import ipdb;
-        #     ipdb.set_trace()
-        #     query = "INSERT INTO pairwise_comp (dialog_id,emp,rel,flu) VALUES ({},{},{})".format(sample[0],sample[1],sample[2],sample[3])
-        #     self.execute_query1(query)        for sample in convs1_res:
-        #     import ipdb;
-        #     ipdb.set_trace()
-        #     query = "INSERT INTO pairwise_comp (dialog_id,emp,rel,flu) VALUES ({},{},{})".format(sample[0],sample[1],sample[2],sample[3])
-        #     self.execute_query1(query)
+        for sample in convs3_res:
+            query = "INSERT INTO rating_dodeca (dialog_id,emp,rel," \
+                    "flu) VALUES ({}," \
+                    "{},{},{})".format(sample[0],sample[1],sample[2],
+                                         sample[3])
+            self.execute_query(query)
+
+        for sample in convs4_res:
+            query = "INSERT INTO pairwise_emo (dialog_id,selection) VALUES ("\
+                    "{},{})".format(sample[0],sample[1])
+            self.execute_query(query)
 
 
-
-
-    def execute_query1(self,query):
+    def execute_query(self,query):
         cursor = self.db_connection.cursor()
         cursor.execute(query)
-        self.db_connection.commit()  # <- We MUST commit to reflect the inserted data
+        self.db_connection.commit()
         cursor.close()
         print("query done")

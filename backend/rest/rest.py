@@ -5,7 +5,7 @@ from src.loaddata import DataLoader
 
 app = Flask(__name__)
 CORS(app)
-dbconn = DBConnect(dbname="empchat",
+dbconn = DBConnect(dbname="empchat_user",
                    user="empchat_user",
                    host='0.0.0.0',
                    password='manoszar',
