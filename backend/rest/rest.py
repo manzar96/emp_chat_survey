@@ -7,9 +7,9 @@ app = Flask(__name__)
 CORS(app)
 dbconn = DBConnect(dbname="empchat_user",
                    user="empchat_user",
-                   host='0.0.0.0',
+                   host='empchat_db',
                    password='manoszar',
-                   port=8888)
+                   port=5432)
 
 dataloader = DataLoader(convfile='./data/conversation.pkl',
                         model3file='./data/mymodel.csv',
