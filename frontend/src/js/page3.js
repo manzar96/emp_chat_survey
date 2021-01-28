@@ -41,7 +41,7 @@ function submitform(){
             }
         }
         sessionStorage.setItem("conversations_page3_results", JSON.stringify(results_page3));
-        window.location.href="../html/last.html";
+        window.location.href="../html/fuck.html";
      }
     else{
         alert("Please fill in all fields!")

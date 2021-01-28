@@ -6,7 +6,7 @@ function make_json_request_async () {
     convs2 = sessionStorage.getItem("conversations_page2");
     convs2_res = sessionStorage.getItem("conversations_page2_results");
     convs3 = sessionStorage.getItem("conversations_page3");
-    convs3_res = sessionStorage.getItem("conversations_page3");
+    convs3_res = sessionStorage.getItem("conversations_page3_results");
     convs4 = sessionStorage.getItem("conversations_page4");
     convs4_res = sessionStorage.getItem("conversations_page4_results");
 

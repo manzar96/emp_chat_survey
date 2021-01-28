@@ -5,8 +5,8 @@ from src.loaddata import DataLoader
 
 app = Flask(__name__)
 CORS(app)
-dbconn = DBConnect(dbname="postgres",
-                   user="postgres",
+dbconn = DBConnect(dbname="empchat",
+                   user="empchat_user",
                    host='0.0.0.0',
                    password='manoszar',
                    port=8888)
@@ -95,11 +95,8 @@ def createconvpage4():
 
 @app.route('/savedb', methods=["POST"])
 def savetodb():
-
     req_data = request.get_json()
-
-    print(req_data)
-    # dbconn.execute_query()
+    dbconn.save_data(req_data)
     return 'Data saved'
 
 
