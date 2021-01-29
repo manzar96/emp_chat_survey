@@ -1,9 +1,6 @@
 #My files
-examples/MNIST/
-cache/*
-checkpoints/*
 data/*
-outputs/*
+postgresdb/data/
 .idea/
 
 # Byte-compiled / optimized / DLL files

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script  src="../../node_modules/jquery/dist/jquery.js"></script>
+    <script  src="../../src/js/page2.js"></script>
+    <!--  add font awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- add font awesome for robot icon   -->
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+    <script>
+    window.onload = makerequest_async();
+    </script>
+
+    <!-- Tab Name-->
+    <title>Empathetic Chatbot Survey</title>
+</head>
+<body>
+
+<h1>Rating Responses</h1>
+
+<p>Please rate the following responses in terms of the following 3 metrics:
+    <b>Empathy</b>, <b>Relevance</b>, and<b> Fluency</b>. </p>
+<i class="fa fa-bell" style="color:red" aria-hidden="true">
+</i> Please always keep in mind that:
+<ul><li><b>Empathy</b> measures whether
+    the listener’s responses show the
+        understanding of the speaker’s feelings.</li>
+  <li><b>Relevance</b> evaluates whether the generated responses are on-topic
+      with the dialogue context.</li>
+  <li><b>Fluency</b> measures the grammatical correctness and readability of the generated responses.</li>
+</ul>
+
+<div id="add"></div>
+
+
+
+<input type="button" value="Next" onclick="submitform()">
+
+</body>
+</html>
